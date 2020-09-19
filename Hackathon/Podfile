@@ -6,7 +6,7 @@ target 'Hackathon' do
   use_frameworks!
 
   # Pods for Hackathon
-
+pod 'Firebase/Analytics'
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
