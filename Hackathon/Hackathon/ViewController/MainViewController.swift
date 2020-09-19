@@ -94,8 +94,11 @@ class MainViewController: UIViewController, MenuControllerDelegate  {
             settingsController.view.isHidden = false
             infoController.view.isHidden = true
         case .LogOut:
+            guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+                      return
+                  }
             
-                let actionSheet = UIAlertController(title: "로그아웃", message: "", preferredStyle: .actionSheet)
+                let actionSheet = UIAlertController(title: "\(myEmail)님 로그아웃 하시겠습니까?", message: "", preferredStyle: .actionSheet)
                 actionSheet.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: {[weak self] _ in
                     
                     guard let StrongSelf = self else{
