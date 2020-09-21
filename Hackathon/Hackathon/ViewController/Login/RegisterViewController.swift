@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 import JGProgressHUD
-
+import Alamofire
 class RegisterViewController: UIViewController {
     
     private let spinner = JGProgressHUD(style: .dark)
@@ -20,20 +20,9 @@ class RegisterViewController: UIViewController {
         return scrollView
     }()
     
+
     
-    
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.circle")
-        imageView.tintColor = .gray
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 2
-        imageView.layer.borderColor = UIColor.lightGray.cgColor
-        return imageView
-    }()
-    
-    private let emailField: UITextField = {
+    private let NameField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
@@ -41,32 +30,14 @@ class RegisterViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "Email Address......"
+        field.placeholder = "이름을 입력해 주세요......"
         
         field.leftView = UIView(frame: CGRect(x:0, y:0 , width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white
         return field
     }()
-    
-    private let passwordField: UITextField = {
-        let field = UITextField()
-        field.autocapitalizationType = .none
-        field.autocorrectionType = .no
-        field.returnKeyType = .done
-        field.layer.cornerRadius = 12
-        field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "password"
-        
-        field.leftView = UIView(frame: CGRect(x:0, y:0 , width: 5, height: 0))
-        field.leftViewMode = .always
-        field.backgroundColor = .white
-        field.isSecureTextEntry = true
-        return field
-    }()
-    
-    private let firstNameField: UITextField = {
+    private let StudentIDField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
@@ -74,22 +45,7 @@ class RegisterViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "First name......"
-        
-        field.leftView = UIView(frame: CGRect(x:0, y:0 , width: 5, height: 0))
-        field.leftViewMode = .always
-        field.backgroundColor = .white
-        return field
-    }()
-    private let LastNameField: UITextField = {
-        let field = UITextField()
-        field.autocapitalizationType = .none
-        field.autocorrectionType = .no
-        field.returnKeyType = .continue
-        field.layer.cornerRadius = 12
-        field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "LastName......"
+        field.placeholder = "학번을 입력해 주세요......"
         
         field.leftView = UIView(frame: CGRect(x:0, y:0 , width: 5, height: 0))
         field.leftViewMode = .always
@@ -120,132 +76,134 @@ class RegisterViewController: UIViewController {
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         
         
-        emailField.delegate = self
-        passwordField.delegate = self
+        
         
         view.addSubview(scrollView)
-        scrollView.addSubview(imageView)
-        scrollView.addSubview(emailField)
-        scrollView.addSubview(firstNameField)
-        scrollView.addSubview(LastNameField)
-        scrollView.addSubview(passwordField)
+        
+        scrollView.addSubview(NameField)
+        scrollView.addSubview(StudentIDField)
+        
         scrollView.addSubview(registerButton)
         
-        imageView.isUserInteractionEnabled = true
+        
         scrollView.isUserInteractionEnabled = true
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePic))
+        
 //        gesture.numberOfTouchesRequired=
-        imageView.addGestureRecognizer(gesture)
+        
     }
     
-    @objc private func didTapChangeProfilePic(){
-        //사진 가져오기
-        presentPototoActionSheet()
-    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
         let size = scrollView.width/3
-        imageView.frame = CGRect(x: (scrollView.width-size)/2,
-                                 y: 20,
-                                 width: size,
-                                 height: size)
-        imageView.layer.cornerRadius = imageView.width/2.0
         
-        firstNameField.frame = CGRect(x:30,
-                                      y: imageView.bottom+10,
+        NameField.frame = CGRect(x:30,
+                                      y: 30,
                                       width: scrollView.width-60,
                                       height: 52)
-        LastNameField.frame = CGRect(x:30,
-                                     y: firstNameField.bottom+10,
+        StudentIDField.frame = CGRect(x:30,
+                                     y: NameField.bottom+10,
                                      width: scrollView.width-60,
                                      height: 52)
-        emailField.frame = CGRect(x:30,
-                                  y: LastNameField.bottom+10,
-                                  width: scrollView.width-60,
-                                  height: 52)
-        passwordField.frame = CGRect(x:30,
-                                     y: emailField.bottom+10,
-                                     width: scrollView.width-60,
-                                     height: 52)
+        
         registerButton.frame = CGRect(x:30,
-                                   y: passwordField.bottom+10,
+                                   y: StudentIDField.bottom+10,
                                    width: scrollView.width-60,
                                    height: 52)
         
     }
     
-    @objc private func registerButtonTapped(){
-        emailField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-        firstNameField.resignFirstResponder()
-        LastNameField.resignFirstResponder()
+    
+    func backMain(){
+    //        let loginPage = self.storyboard?.instantiateViewController(withIdentifier: "LoginPage")
+    //        self.present(loginPage!, animated: true)
+            self.dismiss(animated: true, completion: nil)
+        }
+
+        func signUpSuccessAlert(){
+            let alert = UIAlertController(title: "회원가입 성공", message: "회원가입을 성공했습니다", preferredStyle: UIAlertController.Style.alert)
+            let ok = UIAlertAction(title: "확인", style: UIAlertAction.Style.default){ (_) in
+                self.backMain()
+            }
+            alert.addAction(ok)
+            self.present(alert, animated: false)
+        }
+    
+    
+    func testJson(email:String,name: String, studentID:String) {
+        let URL = "http://localhost:3000/insertName"
         
-        guard let firstname = firstNameField.text,
-            let lastname = LastNameField.text,
-            let email = emailField.text, let password = passwordField.text,
-            !firstname.isEmpty, !lastname.isEmpty,!email.isEmpty, !password.isEmpty, password.count>=6 else{
-                alertUserLoginError()
+        
+        let PARAM: Parameters = [
+            "email":email,
+            "name":name,
+            "studentID":studentID
+        ]
+        //위의 URL와 파라미터를 담아서 POST 방식으로 통신하며, statusCode가 200번대(정상적인 통신) 인지 유효성 검사 진행
+        let alamo = AF.request(URL, method: .post, parameters: PARAM).validate(statusCode: 200..<300)
+        //결과값으로 문자열을 받을 때 사용
+       alamo.responseString() { response in
+        switch response.result
+        {
+        //통신성공
+        case .success(let value):
+           if value == "success"{
+            self.signUpSuccessAlert()
+                print("success: \(value)")
+            
+                
+            }
+            
+            else{
+                print("Failed: \(value)")
+            }
+                
+            //통신실패
+            case .failure(let error):
+                print("error: \(String(describing: error.errorDescription))")
+              
+            }
+        }
+        
+    }
+    
+    @objc private func registerButtonTapped(){
+        
+        
+        NameField.resignFirstResponder()
+        StudentIDField.resignFirstResponder()
+        
+        guard let name = NameField.text,
+            let StudentID = StudentIDField.text else{
                 return
         }
-        // firebase Log in
         
-        spinner.show(in: view)
+        guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
         
-        DatabaseManager.shared.userExists(with: email, completion: {[weak self] exists in
-            guard let StrongSelf = self else{
-                return
-            }
+        testJson(email:myEmail,name: name, studentID: StudentID)
+        
             
-            DispatchQueue.main.async {
-                StrongSelf.spinner.dismiss()
-            }
-            
-            guard !exists else {
-                //user already exists
-                self?.alertUserLoginError(message: "Looks like a user account for that email is alreay exists")
-                return
-            }
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: {authResult, error in
-                     
-                     
-                     guard authResult != nil ,error == nil else{
-                         print("error creating user")
-                         return
-                     }
-                let chatUser = ChatAppUser(firstName: firstname, lastName: lastname, emailAddress: email)
-                DatabaseManager.shared.insertUser(with: chatUser, completion: {success in
-                    if success {
-                        //upload Image
-                        guard let image = StrongSelf.imageView.image, let data = image.pngData() else {
-                            return
-                        }
-                        let fileName = chatUser.profilePictureFileName
-                        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, completion: {result in
-                            switch result{
-                            case .success(let downloadUrl):
-                                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
-                                print(downloadUrl)
-                            case .failure(let error):
-                                print("Storage manager error: \(error)")
-                            }
-                        })
-                    }
-                })
-                     
-                     StrongSelf.navigationController?.dismiss(animated: true, completion: nil)
-                 })
-                 
-                 
-        })
+        
+        
+
         
      
     }
-    func alertUserLoginError(message: String = "please enter all information to create a new account") {
+    func alertUserLoginError(message: String = "서버와의 통신이 불안정 합니다.") {
         let alert = UIAlertController(title: "woops", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
+    
+    func alertUserLogin(message: String = "회원정보를 저장했습니다.") {
+        let alert = UIAlertController(title: "success", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "check", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
     
     @objc private func didTapRegister(){
         let vc = RegisterViewController()
@@ -255,19 +213,7 @@ class RegisterViewController: UIViewController {
     
 }
 
-extension RegisterViewController: UITextFieldDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if textField == emailField{
-            passwordField.becomeFirstResponder()
-        }
-        else if textField == passwordField{
-            registerButtonTapped()
-        }
-        
-        return true
-    }
-}
+
 
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -298,17 +244,6 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         present(vc, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage]as? UIImage else{
-            return
-        }
-        
-        self.imageView.image = selectedImage
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
+ 
     
 }
