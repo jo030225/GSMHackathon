@@ -124,8 +124,11 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
         let formatter = DateFormatter() // DateFormatter 클래스 상수 선언
         formatter.dateFormat = "yyyy.MM.dd. " // formatter의 dateFormat 속성을 설정
         finishdateData = formatter.string(from: datePicker.date)
+        guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+                  return
+              }
         
-        testJson(projectTitle: titleData, projectIntroduce: projectIntroduceData, ITField: ITFieldData, language: languageData, content: contentData, dates: finishdateData)
+        testJson(id: myEmail, projectTitle: titleData, projectIntroduce: projectIntroduceData, ITField: ITFieldData, language: languageData, content: contentData, dates: finishdateData)
         SuccessAlert()
 
     }
@@ -202,11 +205,12 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
     
     
     
-    func testJson(projectTitle: String, projectIntroduce: String, ITField: String, language: String, content: String, dates: String) {
+    func testJson(id:String,projectTitle: String, projectIntroduce: String, ITField: String, language: String, content: String, dates: String) {
         let URL = "http://3.136.17.152:3000"
         
         
         let PARAM: Parameters = [
+            "id":id,
             "title":projectTitle,
             "projectIntroduce": projectIntroduce,
             "ITField": ITField,
