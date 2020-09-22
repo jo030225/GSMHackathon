@@ -13,6 +13,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet var nameTF: UITextField!
     @IBOutlet var numTF: UITextField!
     @IBOutlet var bioTF: UITextField!
+    @IBOutlet var viewV: UIView!
+    @IBOutlet var changeBtn: UIButton!
     
     var name = String()
     var num = String()
@@ -24,6 +26,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             super.viewDidLoad()
             
             picker.delegate = self
+            
+            viewV.layer.cornerRadius = 30
+            changeBtn.layer.cornerRadius = 20
             // Do any additional setup after loading the view.
         }
     
