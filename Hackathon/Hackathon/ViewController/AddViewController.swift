@@ -20,6 +20,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
     @IBOutlet weak var titleTV: UITextView!
     @IBOutlet weak var contentTV: UITextView!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var datePicker: UIDatePicker!
     
     let picker = UIImagePickerController()
     
@@ -28,7 +29,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
     var titleData: String = ""
     var projectIntroduceData: String = ""
     var contentData: String = ""
-   
+    var finishdateData: String = ""
+    
     
     
     override func viewDidLoad() {
@@ -52,6 +54,9 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
         
         picker.delegate = self
         dropDownITField()
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .compact // Replace .inline with .compact
+        }
     }
     
     
@@ -80,7 +85,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
             textView.textColor = UIColor.lightGray
         }
     }
-    //
+    
     
     
     func openLibrary(){
@@ -115,15 +120,17 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
         titleData = titleTV.text!
         projectIntroduceData = contentTV.text!
         contentData = adTextView.text!
-        //        print(titleData)
-        //        print(projectIntroduceData)
-        //        print(ITFieldData)
-        //        print(languageData)
-        //        print(contentData)
         
-        testJson(projectTitle: titleData, projectIntroduce: projectIntroduceData, ITField: ITFieldData, language: languageData, content: contentData)
-        sendImage(value: "img")
+        let formatter = DateFormatter() // DateFormatter 클래스 상수 선언
+        formatter.dateFormat = "yyyy.MM.dd. " // formatter의 dateFormat 속성을 설정
+        finishdateData = formatter.string(from: datePicker.date)
+        
+        testJson(projectTitle: titleData, projectIntroduce: projectIntroduceData, ITField: ITFieldData, language: languageData, content: contentData, dates: finishdateData)
+        SuccessAlert()
+
     }
+    
+
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -132,7 +139,21 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
             imageView.image = image
             
         }
-        
+    }
+    
+    func goMainPage(){
+        guard let goMain = self.storyboard?.instantiateViewController(identifier: "MainPage") else { return }
+        goMain.modalPresentationStyle = .fullScreen
+        self.present(goMain, animated: true)
+    }
+    
+    func SuccessAlert(){
+        let alert = UIAlertController(title: "업로드 성공", message: "업로드를 성공했습니다", preferredStyle: UIAlertController.Style.alert)
+        let ok = UIAlertAction(title: "확인", style: UIAlertAction.Style.default){ (_) in
+                self.goMainPage()
+        }
+        alert.addAction(ok)
+        self.present(alert, animated: false)
     }
     
     func dropDownITField(){
@@ -178,42 +199,43 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
             print("\(response)")
         }
     }
+    
+    
+    
+    func testJson(projectTitle: String, projectIntroduce: String, ITField: String, language: String, content: String, dates: String) {
+        let URL = "http://3.136.17.152:3000"
         
         
-        
-        func testJson(projectTitle: String, projectIntroduce: String, ITField: String, language: String, content: String) {
-            let URL = "http://3.136.17.152:3000"
+        let PARAM: Parameters = [
+            "title":projectTitle,
+            "projectIntroduce": projectIntroduce,
+            "ITField": ITField,
+            "language": language,
+            "content": content,
+            "dates": finishdateData
+        ]
+        //위의 URL와 파라미터를 담아서 POST 방식으로 통신하며, statusCode가 200번대(정상적인 통신) 인지 유효성 검사 진행
+        let alamo = AF.request(URL, method: .post, parameters: PARAM).validate(statusCode: 200..<300)
+        //결과값으로 문자열을 받을 때 사용
+        alamo.responseString() { response in
+            switch response.result
+            {
+            //통신성공
+            case .success(let value):
+                print("value: \(value)")
+                self.sendImage(value: value)
+                print("\(value)")
+            //  self.sendImage(value: value)
             
-            
-            let PARAM: Parameters = [
-                "title":projectTitle,
-                "projectIntroduce": projectIntroduce,
-                "ITField": ITField,
-                "language": language,
-                "content": content
-            ]
-            //위의 URL와 파라미터를 담아서 POST 방식으로 통신하며, statusCode가 200번대(정상적인 통신) 인지 유효성 검사 진행
-            let alamo = AF.request(URL, method: .post, parameters: PARAM).validate(statusCode: 200..<300)
-            //결과값으로 문자열을 받을 때 사용
-            alamo.responseString() { response in
-                switch response.result
-                {
-                //통신성공
-                case .success(let value):
-                    print("value: \(value)")
-                    //  self.resultLabel.text = "\(value)"
-                    print("\(value)")
-                //  self.sendImage(value: value)
-                
-                //통신실패
-                case .failure(let error):
-                    print("error: \(String(describing: error.errorDescription))")
-                    //  self.resultLabel.text = "\(error)"
-                    print("\(error)")
-                }
+            //통신실패
+            case .failure(let error):
+                print("error: \(String(describing: error.errorDescription))")
+                //  self.resultLabel.text = "\(error)"
+                print("\(error)")
             }
-            
         }
         
-        
     }
+    
+    
+}
