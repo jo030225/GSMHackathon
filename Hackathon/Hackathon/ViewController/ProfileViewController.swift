@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController {
             
             let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 500))
             
-            headerView.backgroundColor = .gray
+            headerView.backgroundColor = .white
             
             let imageView = UIImageView(frame: CGRect(x: (view.width - 150)/2, y: 75, width: 150, height: 150))
             let nameLabel = UILabel(frame: CGRect(x: 0, y: 230, width: view.width, height: 30))
@@ -76,7 +76,7 @@ class ProfileViewController: UIViewController {
             bioTV.font = UIFont.systemFont(ofSize: 20)
             bioTV.isEditable = false
             bioTV.contentMode = .scaleAspectFit
-            bioTV.backgroundColor = .gray
+            bioTV.backgroundColor = .white
             bioTV.autocapitalizationType = .sentences
             headerView.addSubview(bioTV)
             
