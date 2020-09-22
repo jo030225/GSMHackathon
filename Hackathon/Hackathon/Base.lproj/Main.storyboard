@@ -278,6 +278,9 @@
                                 <state key="normal" title="확 인">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="doneBtn:" destination="nkX-vl-YY8" eventType="touchUpInside" id="1QS-gx-9zs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LYg-9Y-48x"/>
