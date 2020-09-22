@@ -36,14 +36,15 @@ class ProfileViewController: UIViewController {
             
             let path = "images/"+filename
             
-            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 500))
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 578))
             
-            headerView.backgroundColor = .white
+            headerView.layer.backgroundColor = UIColor(red: 1, green: 0.972, blue: 0.929, alpha: 1).cgColor
             
             let imageView = UIImageView(frame: CGRect(x: (view.width - 150)/2, y: 75, width: 150, height: 150))
-            let nameLabel = UILabel(frame: CGRect(x: 0, y: 230, width: view.width, height: 30))
-            let numLabel = UILabel(frame: CGRect(x: 0, y: 260, width: view.width, height: 30))
-            let bioTV = UITextView(frame: CGRect(x: 20, y: 290, width: view.width-40, height: 180))
+            let nameLabel = UILabel(frame: CGRect(x: 160, y: 10, width: view.width, height: 30))
+            let numLabel = UILabel(frame: CGRect(x: 160, y: 40, width: view.width, height: 30))
+            let bioTV = UITextView(frame: CGRect(x: 160, y: 70, width: view.width, height: 180))
+            let miniView = UIView(frame: CGRect(x: 20, y: 230, width: view.width-40,height: 262))
             
             imageView.contentMode = .scaleAspectFill
             imageView.backgroundColor = .white
@@ -51,7 +52,12 @@ class ProfileViewController: UIViewController {
             imageView.layer.borderWidth = 3
             imageView.layer.masksToBounds = true
             imageView.layer.cornerRadius = imageView.width/2
+            
+            miniView.backgroundColor = .white
+        
+            
             headerView.addSubview(imageView)
+            headerView.addSubview(miniView)
             StorageManager.shared.downloadURL(for: path, completion: {[weak self] result in
                 switch result {
                 case .success(let url):
@@ -62,23 +68,23 @@ class ProfileViewController: UIViewController {
             })
             
             nameLabel.text = "이름"
-            nameLabel.textAlignment = .center
-            nameLabel.font = UIFont.systemFont(ofSize: 20)
-            headerView.addSubview(nameLabel)
+            //nameLabel.textAlignment = .center
+            nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            miniView.addSubview(nameLabel)
             
             numLabel.text = "학번"
-            numLabel.textAlignment = .center
-            numLabel.font = UIFont.systemFont(ofSize: 20)
-            headerView.addSubview(numLabel)
+            //numLabel.textAlignment = .center
+            numLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            miniView.addSubview(numLabel)
             
             bioTV.text = "관심분야"
-            bioTV.textAlignment = .center
-            bioTV.font = UIFont.systemFont(ofSize: 20)
+            //bioTV.textAlignment = .center
+            bioTV.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             bioTV.isEditable = false
             bioTV.contentMode = .scaleAspectFit
             bioTV.backgroundColor = .white
             bioTV.autocapitalizationType = .sentences
-            headerView.addSubview(bioTV)
+            miniView.addSubview(bioTV)
             
             return headerView
         }
