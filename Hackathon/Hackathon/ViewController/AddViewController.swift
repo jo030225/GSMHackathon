@@ -30,6 +30,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
     var projectIntroduceData: String = ""
     var contentData: String = ""
     var finishdateData: String = ""
+    var imgData = UIImage()
     
     
     
@@ -66,7 +67,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
         adTextView.delegate = self
         adTextView.text = "모집에 대한 설명을 써주세요!"
         adTextView.textColor = UIColor.lightGray
-    
+        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -95,52 +96,54 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
         present(picker, animated: false, completion: nil)
     }
     
+    func data(){
+        titleData = titleTV.text!
+        projectIntroduceData = contentTV.text!
+        contentData = adTextView.text!
+        imgData = imageView.image!
+    }
+    
+//    func nilCheck(){
+//        if (titleData == "" || projectIntroduceData == "" || contentData == "" || ITFieldData == "" || languageData == "") {
+//            dataCheckAlert()
+//        }
+//    }
     
     @IBAction func imgBtn(_ sender: UIButton) {
         let alert =  UIAlertController(title: "프로필 사진 변경", message: "", preferredStyle: .actionSheet)
         
         
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary()
-            
-        }
-        
-        
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        
         alert.addAction(library)
-        
-        
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
     }
     
     @IBAction func doneBtn(_ sender: UIButton) {
-        titleData = titleTV.text!
-        projectIntroduceData = contentTV.text!
-        contentData = adTextView.text!
+        data()
         
         let formatter = DateFormatter() // DateFormatter 클래스 상수 선언
         formatter.dateFormat = "yyyy.MM.dd. " // formatter의 dateFormat 속성을 설정
         finishdateData = formatter.string(from: datePicker.date)
+        
         guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
-                  return
-              }
+            return
+        }
         
         testJson(id: myEmail, projectTitle: titleData, projectIntroduce: projectIntroduceData, ITField: ITFieldData, language: languageData, content: contentData, dates: finishdateData)
+        
         SuccessAlert()
-
+        
     }
-    
-
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             picker.dismiss(animated: true, completion: nil)
             imageView.image = image
-            
         }
     }
     
@@ -153,11 +156,18 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
     func SuccessAlert(){
         let alert = UIAlertController(title: "업로드 성공", message: "업로드를 성공했습니다", preferredStyle: UIAlertController.Style.alert)
         let ok = UIAlertAction(title: "확인", style: UIAlertAction.Style.default){ (_) in
-                self.goMainPage()
+            self.goMainPage()
         }
         alert.addAction(ok)
         self.present(alert, animated: false)
     }
+    
+//    func dataCheckAlert(){
+//        let alert = UIAlertController(title: "업로드 실패", message: "빈칸이 있습니다.", preferredStyle: UIAlertController.Style.alert)
+//        let ok = UIAlertAction(title: "확인", style: UIAlertAction.Style.default){ (_) in }
+//        alert.addAction(ok)
+//        self.present(alert, animated: false)
+//    }
     
     func dropDownITField(){
         ITField.optionArray = ["웹 개발", "iOS 개발", "Android 개발"]
@@ -227,7 +237,9 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
             //통신성공
             case .success(let value):
                 print("value: \(value)")
-                self.sendImage(value: value)
+//                if self.imgData.images != nil{
+                    self.sendImage(value: value)
+//                }
                 print("\(value)")
             //  self.sendImage(value: value)
             
