@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A313315CDC5EBBE955DA57C3 /* Pods_Hackathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA97832A9C04C192919A12B /* Pods_Hackathon.framework */; };
+		E5853F4D2519CE5200A1E82A /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5853F4C2519CE5200A1E82A /* EditProfileViewController.swift */; };
 		F92F38B72514E10F005C446A /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F38B62514E10F005C446A /* AddViewController.swift */; };
 		F92F38B92514E119005C446A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F38B82514E119005C446A /* ProfileViewController.swift */; };
 		F92F38BC2514E30D005C446A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F92F38BB2514E30C005C446A /* GoogleService-Info.plist */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		759B64F1A4EB1ED7BF11FB33 /* Pods-Hackathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackathon.debug.xcconfig"; path = "Target Support Files/Pods-Hackathon/Pods-Hackathon.debug.xcconfig"; sourceTree = "<group>"; };
 		CDA97832A9C04C192919A12B /* Pods_Hackathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hackathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5853F4C2519CE5200A1E82A /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		ED0B93EA04BED435E599C70F /* Pods-Hackathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackathon.release.xcconfig"; path = "Target Support Files/Pods-Hackathon/Pods-Hackathon.release.xcconfig"; sourceTree = "<group>"; };
 		F92F38B62514E10F005C446A /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		F92F38B82514E119005C446A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				F92F38B82514E119005C446A /* ProfileViewController.swift */,
 				F92F38C82514F682005C446A /* SettingViewController.swift */,
 				F92F38CA2514F6B9005C446A /* InfoViewController.swift */,
+				E5853F4C2519CE5200A1E82A /* EditProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				F92F38C12514E3AA005C446A /* RegisterViewController.swift in Sources */,
 				F92F38C72514F646005C446A /* SideMenu.swift in Sources */,
 				F9AAABB02514DC47007C703A /* AppDelegate.swift in Sources */,
+				E5853F4D2519CE5200A1E82A /* EditProfileViewController.swift in Sources */,
 				F92F38C92514F682005C446A /* SettingViewController.swift in Sources */,
 				F92F38B92514E119005C446A /* ProfileViewController.swift in Sources */,
 				F9B2452B2515E5B300E81389 /* DatabaseManager.swift in Sources */,

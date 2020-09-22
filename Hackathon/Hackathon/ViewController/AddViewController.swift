@@ -15,8 +15,6 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
     @IBOutlet weak var miniView: UIView!
     @IBOutlet weak var adTextView: UITextView!
     @IBOutlet weak var okBtn: UIButton!
-    
-    
     @IBOutlet var ITField: DropDown!
     @IBOutlet var language: DropDown!
     @IBOutlet weak var titleTV: UITextView!
@@ -68,6 +66,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
         adTextView.delegate = self
         adTextView.text = "모집에 대한 설명을 써주세요!"
         adTextView.textColor = UIColor.lightGray
+    
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -76,6 +75,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
             textView.textColor = UIColor.black
         }
     }
+    
+    
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
@@ -132,6 +133,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITe
 
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             picker.dismiss(animated: true, completion: nil)
             imageView.image = image
