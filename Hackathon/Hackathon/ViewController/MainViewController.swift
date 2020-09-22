@@ -10,6 +10,8 @@ import UIKit
 import FirebaseAuth
 import Alamofire
 class MainViewController: UIViewController, MenuControllerDelegate  {
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     private var sideMenu: SideMenuNavigationController?
     
     private let settingsController = SettingViewController()
@@ -17,6 +19,10 @@ class MainViewController: UIViewController, MenuControllerDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.backgroundColor = UIColor.white
+        }
 
         guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
             return

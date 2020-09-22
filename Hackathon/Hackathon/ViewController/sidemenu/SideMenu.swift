@@ -14,8 +14,8 @@ protocol MenuControllerDelegate {
 }
 
 enum SideMenuItem: String, CaseIterable {
-    case home = "Home"
-    case info = "Info"
+    case home = "Projects"
+    case info = "My Room"
     case settings = "Settings"
     case LogOut = "logOut"
 }
@@ -25,10 +25,7 @@ class MenuController: UITableViewController {
     public var delegate: MenuControllerDelegate?
 
     private let menuItems: [SideMenuItem]
-    private let color = UIColor(red: 33/255.0,
-                                green: 33/255.0,
-                                blue: 33/255.0,
-                                alpha: 1)
+    private let color = UIColor(red: 0.508, green: 0.663, blue: 0.56, alpha: 1)
 
     init(with menuItems: [SideMenuItem]) {
         self.menuItems = menuItems

@@ -10,25 +10,70 @@ import UIKit
 import Alamofire
 import iOSDropDown
 
-class AddViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class AddViewController: UIViewController, UIImagePickerControllerDelegate, UITextViewDelegate ,UINavigationControllerDelegate {
+    @IBOutlet weak var addView: UIView!
+    @IBOutlet weak var miniView: UIView!
+    @IBOutlet weak var adTextView: UITextView!
+    @IBOutlet weak var okBtn: UIButton!
     
     
     @IBOutlet var ITField: DropDown!
     @IBOutlet var language: DropDown!
-    @IBOutlet var titleTextField: UITextField!
-    @IBOutlet var contentTextField: UITextField!
-    @IBOutlet var valueLabel: UILabel!
-    @IBOutlet var value2Label: UILabel!
+    @IBOutlet weak var titleTV: UITextView!
+    @IBOutlet weak var contentTV: UITextView!
     @IBOutlet var imageView: UIImageView!
+    
     let picker = UIImagePickerController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //디자인 코드
+        addView.layer.cornerRadius = 20
+        addView.layer.shadowColor = UIColor.gray.cgColor
+        addView.layer.shadowOpacity = 1
+        addView.layer.shadowOffset = .zero
+        addView.layer.shadowRadius = 10
+        titleTV.layer.cornerRadius = 10
+        contentTV.layer.cornerRadius = 10
+        miniView.layer.cornerRadius = 10
+        adTextView.layer.cornerRadius = 5
+        okBtn.layer.cornerRadius = 10
+        //
+        
+        placeholderSetting()
         
         testJson(email: "testEmail", pw: "testPassword", tel: "testTel")
         picker.delegate = self
         dropDownITField()
     }
+    
+    
+    //adTextView placeholder 설정 코드
+    func placeholderSetting() {
+        
+        adTextView.delegate = self
+        adTextView.text = "모집에 대한 설명을 써주세요!"
+        adTextView.textColor = UIColor.lightGray
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            
+            textView.text = "모집에 대한 설명을 써주세요!"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+    //
+    
     
     func openLibrary(){
         
@@ -71,24 +116,23 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate & UIN
         ITField.optionArray = ["웹 개발", "iOS 개발", "Android 개발"]
         ITField.optionIds = [1,2,3]
         ITField.didSelect{ (selectedText , index ,id) in
-            self.valueLabel.text! = selectedText
             if id == 1 {
                 self.language.optionArray = ["JavaScript", "HTML", "CSS", "Node.js","React"]
                 self.language.optionIds = [1,2,3,4,5]
                 self.language.didSelect{ (selectedText , index ,id) in
-                    self.value2Label.text! = selectedText
+                    
                 }
             } else if id == 2 {
                 self.language.optionArray = ["Swift", "Objective-C"]
                 self.language.optionIds = [1,2,3]
                 self.language.didSelect{ (selectedText , index ,id) in
-                    self.value2Label.text! = selectedText
+                    
                 }
             } else if id == 3 {
                 self.language.optionArray = ["Kotlin", "Java"]
                 self.language.optionIds = [1,2,3]
                 self.language.didSelect{ (selectedText , index ,id) in
-                    self.value2Label.text! = selectedText
+                    
                 }
             }
         }
