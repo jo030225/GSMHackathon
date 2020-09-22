@@ -9,10 +9,17 @@
 import UIKit
 
 class InfoViewController: UIViewController {
+    
+    
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+        view.layer.backgroundColor = UIColor(red: 0.938, green: 1, blue: 0.959, alpha: 1).cgColor
+        
+        
+        
     }
   
 
