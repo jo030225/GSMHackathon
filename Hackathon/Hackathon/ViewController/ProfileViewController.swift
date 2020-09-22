@@ -14,7 +14,7 @@ import GoogleSignIn
 class ProfileViewController: UIViewController {
         @IBOutlet var tableView: UITableView!
         
-        let data = ["Log out"]
+        let data = ["프로필 수정", "Log out"]
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -36,12 +36,14 @@ class ProfileViewController: UIViewController {
             
             let path = "images/"+filename
             
-            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 300))
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 500))
             
             headerView.backgroundColor = .gray
             
             let imageView = UIImageView(frame: CGRect(x: (view.width - 150)/2, y: 75, width: 150, height: 150))
-            
+            let nameLabel = UILabel(frame: CGRect(x: 0, y: 230, width: view.width, height: 30))
+            let numLabel = UILabel(frame: CGRect(x: 0, y: 260, width: view.width, height: 30))
+            let bioTV = UITextView(frame: CGRect(x: 20, y: 290, width: view.width-40, height: 180))
             
             imageView.contentMode = .scaleAspectFill
             imageView.backgroundColor = .white
@@ -58,6 +60,25 @@ class ProfileViewController: UIViewController {
                     print("Fail to download url")
                 }
             })
+            
+            nameLabel.text = "이름"
+            nameLabel.textAlignment = .center
+            nameLabel.font = UIFont.systemFont(ofSize: 20)
+            headerView.addSubview(nameLabel)
+            
+            numLabel.text = "학번"
+            numLabel.textAlignment = .center
+            numLabel.font = UIFont.systemFont(ofSize: 20)
+            headerView.addSubview(numLabel)
+            
+            bioTV.text = "관심분야"
+            bioTV.textAlignment = .center
+            bioTV.font = UIFont.systemFont(ofSize: 20)
+            bioTV.isEditable = false
+            bioTV.contentMode = .scaleAspectFit
+            bioTV.backgroundColor = .gray
+            bioTV.autocapitalizationType = .sentences
+            headerView.addSubview(bioTV)
             
             return headerView
         }
@@ -90,10 +111,21 @@ class ProfileViewController: UIViewController {
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
+            let row = indexPath.row
+            
+
+            let editProfileActionSheet = UIAlertController(title: "", message: "",preferredStyle: .actionSheet)
+            editProfileActionSheet.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
+            editProfileActionSheet.addAction(UIAlertAction(title: "프로필 수정", style: .destructive){
+                (action) in
+                let vcName = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController")
+                vcName?.modalTransitionStyle = .coverVertical
+                self.present(vcName!, animated: true, completion: nil)
+            })
             
             
-            let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-            actionSheet.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: {[weak self] _ in
+            let loginActionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            loginActionSheet.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: {[weak self] _ in
                 
                 guard let StrongSelf = self else{
                     return
@@ -118,11 +150,14 @@ class ProfileViewController: UIViewController {
                 }
                 
             }))
-            actionSheet.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
+            loginActionSheet.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
             
-            present(actionSheet, animated: true)
-            
-            
+            if row == 0{
+                present(editProfileActionSheet, animated: true)
+            }
+            else if row == 1{
+                present(loginActionSheet, animated: true)
+            }
         }
     @IBAction func chatBtnClicked(_ sender: UIBarButtonItem) {
         let vc = ConversationsViewController()
