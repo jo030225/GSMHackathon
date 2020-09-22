@@ -9,7 +9,26 @@ import SideMenu
 import UIKit
 import FirebaseAuth
 import Alamofire
-class MainViewController: UIViewController, MenuControllerDelegate  {
+
+struct APIResponse: Codable {
+    let results: APIResponseResults
+    let status: String
+}
+
+struct APIResponseResults: Codable {
+    let num: Int
+    let id: String
+    let title: String
+    let contents: String
+    let recruit: String
+    let link: String
+    let tag: String
+    let board: String
+    let dates: String
+    let heart: String
+}
+
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MenuControllerDelegate  {
     @IBOutlet weak var searchBar: UISearchBar!
     
     private var sideMenu: SideMenuNavigationController?
@@ -17,8 +36,35 @@ class MainViewController: UIViewController, MenuControllerDelegate  {
     private let settingsController = SettingViewController()
     private let infoController = InfoViewController()
     
+    private var titledata = [String]()
+    private var contentsdata = [String]()
+    private var linkdata = [String]()
+    private var tagdata = [String]()
+    private var datesdata = [String]()
+    private var heartdata = [String]()
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchPostdata { (posts) in
+            for post in posts {
+                self.titledata.append("\(post.title!)")
+                print("\(self.titledata)")
+                self.contentsdata.append("\(post.contents!)")
+                self.datesdata.append("\(post.dates!)")
+            }
+        }
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        let nibName = UINib(nibName: "TableViewCell", bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: "Cell")
+        
+        tableView.reloadData()
+        //fetchData()
         
         if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
             textfield.backgroundColor = UIColor.white
@@ -53,6 +99,32 @@ class MainViewController: UIViewController, MenuControllerDelegate  {
         super.viewDidAppear(animated)
         validateAuth()
     }
+    
+    @objc private func didPullToRefresh() {
+        //refecth data
+    }
+    
+    func fetchPostdata(completionHandler: @escaping ([Post]) -> Void){
+            
+            let url = URL(string: "http://3.136.17.152:3000")!
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                guard let data = data else { return }
+                
+                do {
+                    
+                    let postsData = try JSONDecoder().decode([Post].self, from: data)
+                    
+                    completionHandler(postsData)
+                    
+                }catch{
+                    let error = error
+                    print("\(error.localizedDescription)")
+                }
+                
+            }.resume()
+        }
     
     func getName(email:String) {
         
@@ -223,6 +295,32 @@ class MainViewController: UIViewController, MenuControllerDelegate  {
         vc.title = ""
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    //-------------------
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return titledata.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
+        print("cellForRowAt")
+        cell.projectName.text = titledata[(indexPath as NSIndexPath).row]
+        cell.projectContents.text = contentsdata[(indexPath as NSIndexPath).row]
+        cell.dDay.text = datesdata[(indexPath as NSIndexPath).row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let callDetail = self.storyboard?.instantiateViewController(withIdentifier: "ProjectContentsView")
+        callDetail?.modalTransitionStyle = .coverVertical
+        self.present(callDetail!, animated: true, completion: nil)
+    }
+    
     
 }
 
