@@ -71,11 +71,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "확인", style: .destructive){ [self]
             (action) in
-            name = nameTF.text!
-            num = numTF.text!
-            bio = bioTF.text!
-            
-            dismiss(animated: true, completion: nil)
+//            name = nameTF.text!
+//            num = numTF.text!
+//            bio = bioTF.text!
+//
+//            dismiss(animated: true, completion: nil)
         })
         present(alert, animated: true, completion: nil)
     }
