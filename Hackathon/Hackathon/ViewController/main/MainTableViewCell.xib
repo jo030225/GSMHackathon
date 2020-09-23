@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="282" id="KGk-i7-Jjw" customClass="MainTableViewCell" customModule="Hackathon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="282"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="360" height="282"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJj-As-Fhm">
+                        <rect key="frame" x="240" y="10" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="Eq8-6Q-i5Q"/>
+                            <constraint firstAttribute="width" constant="100" id="lfq-K7-hdf"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelasdfasfasfd;laskjflasjf;lkasjf;lkjasfl;jasl;fjal;sjflas;dkfj" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="094-NG-Pq0">
+                        <rect key="frame" x="12" y="0.0" width="201" height="90"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uki-lQ-N9x">
+                        <rect key="frame" x="12" y="249" width="24" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="heart" catalog="system">
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                        </state>
+                        <connections>
+                            <action selector="likeBtnTapped:" destination="KGk-i7-Jjw" eventType="touchDown" id="RHG-Dv-VqW"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MW6-bE-ava">
+                        <rect key="frame" x="20" y="112" width="193" height="122"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Labelasdfasfasfd;laskjflasjf;lkasjf;lkjasfl;jasl;fjal;sjflas;dkfj">
+                                <attributes>
+                                    <font key="NSFont" metaFont="system" size="15"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="qJj-As-Fhm" secondAttribute="trailing" constant="10" id="PbK-lz-NBP"/>
+                    <constraint firstAttribute="bottom" secondItem="qJj-As-Fhm" secondAttribute="bottom" constant="10" id="Q2h-vg-zgr"/>
+                    <constraint firstItem="qJj-As-Fhm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="d10-wk-nyg"/>
+                    <constraint firstItem="qJj-As-Fhm" firstAttribute="leading" secondItem="094-NG-Pq0" secondAttribute="trailing" constant="10" id="y9J-QT-ggQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="PostImageView" destination="qJj-As-Fhm" id="q9x-vh-isq"/>
+                <outlet property="TextView" destination="094-NG-Pq0" id="Qaq-jA-qp9"/>
+                <outlet property="contents" destination="MW6-bE-ava" id="Bcw-HL-wyp"/>
+                <outlet property="likeBtn" destination="uki-lQ-N9x" id="zDw-w5-fQv"/>
+            </connections>
+            <point key="canvasLocation" x="56.521739130434788" y="206.25"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
+    </resources>
+</document>
