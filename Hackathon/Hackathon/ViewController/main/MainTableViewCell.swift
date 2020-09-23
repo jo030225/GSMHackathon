@@ -66,9 +66,9 @@ class MainTableViewCell: UITableViewCell {
     
     
     @IBAction func likeBtnTapped(_ sender: Any) {
-        guard let text = post.id else {return}
+        
         testJson(id: "TestID", value: TextView.text!)
-        print(text)
+        
         
     }
 }
