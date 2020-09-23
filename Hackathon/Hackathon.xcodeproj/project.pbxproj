@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04ACF6FE251A3ADF009CE033 /* post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACF6FD251A3ADF009CE033 /* post.swift */; };
-		04ACF701251A3AEB009CE033 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACF700251A3AEB009CE033 /* TableViewCell.swift */; };
-		04ACF704251A3AEE009CE033 /* ProjectContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACF703251A3AEE009CE033 /* ProjectContentsController.swift */; };
-		04ACF707251A3B68009CE033 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ACF706251A3B68009CE033 /* TableViewCell.xib */; };
 		A313315CDC5EBBE955DA57C3 /* Pods_Hackathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA97832A9C04C192919A12B /* Pods_Hackathon.framework */; };
+		BD34C910251AEB8700D20069 /* post.Swift in Sources */ = {isa = PBXBuildFile; fileRef = BD34C90F251AEB8700D20069 /* post.Swift */; };
+		BD34C914251AEBFD00D20069 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD34C912251AEBFD00D20069 /* TableViewCell.swift */; };
+		BD34C915251AEBFD00D20069 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD34C913251AEBFD00D20069 /* TableViewCell.xib */; };
+		BD34C918251AEC4300D20069 /* ProjectContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD34C917251AEC4300D20069 /* ProjectContentsController.swift */; };
 		E5853F4D2519CE5200A1E82A /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5853F4C2519CE5200A1E82A /* EditProfileViewController.swift */; };
 		F92F38B72514E10F005C446A /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F38B62514E10F005C446A /* AddViewController.swift */; };
 		F92F38B92514E119005C446A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F38B82514E119005C446A /* ProfileViewController.swift */; };
@@ -39,11 +39,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04ACF6FD251A3ADF009CE033 /* post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = post.swift; path = "../../../../../../Desktop/GSMHackathon 복사본/Hackathon/Hackathon/ViewController/post.swift"; sourceTree = "<group>"; };
-		04ACF700251A3AEB009CE033 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = "../../../../../../Desktop/GSMHackathon 복사본/Hackathon/Hackathon/ViewController/TableViewCell.swift"; sourceTree = "<group>"; };
-		04ACF703251A3AEE009CE033 /* ProjectContentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectContentsController.swift; path = "../../../../../../Desktop/GSMHackathon 복사본/Hackathon/Hackathon/ViewController/ProjectContentsController.swift"; sourceTree = "<group>"; };
-		04ACF706251A3B68009CE033 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableViewCell.xib; path = "../../../../../../Desktop/GSMHackathon 복사본/Hackathon/Hackathon/ViewController/TableViewCell.xib"; sourceTree = "<group>"; };
 		759B64F1A4EB1ED7BF11FB33 /* Pods-Hackathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackathon.debug.xcconfig"; path = "Target Support Files/Pods-Hackathon/Pods-Hackathon.debug.xcconfig"; sourceTree = "<group>"; };
+		BD34C90F251AEB8700D20069 /* post.Swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = post.Swift; sourceTree = "<group>"; };
+		BD34C912251AEBFD00D20069 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		BD34C913251AEBFD00D20069 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		BD34C917251AEC4300D20069 /* ProjectContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectContentsController.swift; sourceTree = "<group>"; };
 		CDA97832A9C04C192919A12B /* Pods_Hackathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hackathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5853F4C2519CE5200A1E82A /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		ED0B93EA04BED435E599C70F /* Pods-Hackathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hackathon.release.xcconfig"; path = "Target Support Files/Pods-Hackathon/Pods-Hackathon.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,15 +109,15 @@
 				F92F38C52514F634005C446A /* sidemenu */,
 				F92F38BD2514E393005C446A /* Login */,
 				F9AAABB32514DC47007C703A /* MainViewController.swift */,
-				04ACF6FD251A3ADF009CE033 /* post.swift */,
+				BD34C90F251AEB8700D20069 /* post.Swift */,
 				F92F38B62514E10F005C446A /* AddViewController.swift */,
 				F92F38B82514E119005C446A /* ProfileViewController.swift */,
 				F92F38C82514F682005C446A /* SettingViewController.swift */,
 				F92F38CA2514F6B9005C446A /* InfoViewController.swift */,
 				E5853F4C2519CE5200A1E82A /* EditProfileViewController.swift */,
-				04ACF706251A3B68009CE033 /* TableViewCell.xib */,
-				04ACF700251A3AEB009CE033 /* TableViewCell.swift */,
-				04ACF703251A3AEE009CE033 /* ProjectContentsController.swift */,
+				BD34C912251AEBFD00D20069 /* TableViewCell.swift */,
+				BD34C913251AEBFD00D20069 /* TableViewCell.xib */,
+				BD34C917251AEC4300D20069 /* ProjectContentsController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -259,7 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9B245362515F05700E81389 /* ConversationsViewController.xib in Resources */,
-				04ACF707251A3B68009CE033 /* TableViewCell.xib in Resources */,
+				BD34C915251AEBFD00D20069 /* TableViewCell.xib in Resources */,
 				F9AAABBC2514DC48007C703A /* LaunchScreen.storyboard in Resources */,
 				F92F38BC2514E30D005C446A /* GoogleService-Info.plist in Resources */,
 				F9AAABB92514DC48007C703A /* Assets.xcassets in Resources */,
@@ -337,16 +337,16 @@
 				F92F38CB2514F6B9005C446A /* InfoViewController.swift in Sources */,
 				F9B2453A2515F40800E81389 /* NewConversationViewController.swift in Sources */,
 				F9AAABB42514DC47007C703A /* MainViewController.swift in Sources */,
+				BD34C910251AEB8700D20069 /* post.Swift in Sources */,
 				F92F38C12514E3AA005C446A /* RegisterViewController.swift in Sources */,
-				04ACF704251A3AEE009CE033 /* ProjectContentsController.swift in Sources */,
 				F92F38C72514F646005C446A /* SideMenu.swift in Sources */,
 				F9AAABB02514DC47007C703A /* AppDelegate.swift in Sources */,
+				BD34C914251AEBFD00D20069 /* TableViewCell.swift in Sources */,
 				E5853F4D2519CE5200A1E82A /* EditProfileViewController.swift in Sources */,
+				BD34C918251AEC4300D20069 /* ProjectContentsController.swift in Sources */,
 				F92F38C92514F682005C446A /* SettingViewController.swift in Sources */,
 				F92F38B92514E119005C446A /* ProfileViewController.swift in Sources */,
 				F9B2452B2515E5B300E81389 /* DatabaseManager.swift in Sources */,
-				04ACF6FE251A3ADF009CE033 /* post.swift in Sources */,
-				04ACF701251A3AEB009CE033 /* TableViewCell.swift in Sources */,
 				F9B245352515F05700E81389 /* ConversationsViewController.swift in Sources */,
 				F9B2453C2515F48300E81389 /* ChatViewController.swift in Sources */,
 				F9B245422516051700E81389 /* ProfileViewModel.swift in Sources */,
